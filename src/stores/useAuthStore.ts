@@ -36,10 +36,17 @@ const useAuthStore = create<AuthState>((set) => ({
       user: state.user ? { ...state.user, ...partial } : null,
     })),
 
-  hydrate: () => {
+  hydrate: async () => {
     const token = localStorage.getItem("token");
     if (token) {
       set({ token });
+      try {
+        const { data } = await api.get("/users/me");
+        set({ user: data });
+      } catch {
+        localStorage.removeItem("token");
+        set({ token: null, user: null });
+      }
     }
   },
 }));

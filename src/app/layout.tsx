@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
+import AuthHydrator from "./_components/AuthHydrator";
 import "./globals.scss";
 
 const spaceGrotesk = Space_Grotesk({
@@ -35,6 +36,7 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <AuthHydrator />
         {children}
         <Toaster
           position="top-right"
