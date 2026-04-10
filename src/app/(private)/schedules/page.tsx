@@ -9,6 +9,7 @@ import ScheduleDetailPanel from "./_components/ScheduleDetailPanel";
 import ScheduleModal from "./_components/ScheduleModal";
 import DeleteScheduleModal from "./_components/DeleteScheduleModal";
 import type { SchedulePayload } from "@/types";
+import PageContainer from "@/app/_components/PageContainer/PageContainer";
 import styles from "./schedules.module.scss";
 
 export default function SchedulesPage() {
@@ -90,7 +91,7 @@ export default function SchedulesPage() {
       </header>
 
       {loading ? (
-        <div className={styles.loadingState}>스케줄을 불러오는 중...</div>
+        <PageContainer loading />
       ) : (
         <div className={styles.content}>
           <Calendar

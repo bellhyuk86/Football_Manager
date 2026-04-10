@@ -6,6 +6,7 @@ import PasswordSection from "./_components/PasswordSection";
 import PlayerInfoSection from "./_components/PlayerInfoSection";
 import TeamManageSection from "./_components/TeamManageSection";
 import AccountSection from "./_components/AccountSection";
+import PageContainer from "@/app/_components/PageContainer/PageContainer";
 import styles from "./mypage.module.scss";
 
 export default function MyPage() {
@@ -25,7 +26,7 @@ export default function MyPage() {
   } = useMyPage();
 
   if (loading || !profile) {
-    return <div className={styles.loadingState}>프로필을 불러오는 중...</div>;
+    return <PageContainer loading />;
   }
 
   const isManager = profile.role === "manager";

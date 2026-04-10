@@ -5,6 +5,7 @@ import useAuthStore from "@/stores/useAuthStore";
 import { useTeamMembers } from "./_hooks/useTeamMembers";
 import UserCard from "./_components/UserCard";
 import RoleChangeModal from "./_components/RoleChangeModal";
+import PageContainer from "@/app/_components/PageContainer/PageContainer";
 import styles from "./users.module.scss";
 
 export default function UsersPage() {
@@ -46,7 +47,7 @@ export default function UsersPage() {
       </header>
 
       {loading ? (
-        <div className={styles.loadingState}>팀원 목록을 불러오는 중...</div>
+        <PageContainer loading />
       ) : (
         <div className={styles.cardGrid}>
           {members.map((member) => (
