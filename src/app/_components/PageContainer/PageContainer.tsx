@@ -3,7 +3,7 @@ import styles from "./PageContainer.module.scss";
 
 interface PageContainerProps {
   loading?: boolean;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export default function PageContainer({ loading, children }: PageContainerProps) {
