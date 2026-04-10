@@ -1,0 +1,272 @@
+.section {
+  padding: 6rem 1.5rem;
+  max-width: 1440px;
+  margin: 0 auto;
+
+  @media (min-width: 768px) {
+    padding: 6rem 3rem;
+  }
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 5rem;
+  gap: 1.5rem;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+}
+
+.headerLeft {
+  max-width: 42rem;
+}
+
+.sectionTitle {
+  font-family: var(--font-headline);
+  font-size: clamp(2rem, 5vw, 3.75rem);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.titleBar {
+  width: 6rem;
+  height: 0.25rem;
+  background: var(--color-primary);
+}
+
+.headerLabel {
+  color: var(--color-on-surface-variant);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+// ─── Bento Grid ───
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(12, 1fr);
+  }
+}
+
+// ─── Card Base ───
+.card {
+  background: var(--color-surface-container-low);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cardIcon {
+  color: var(--color-primary);
+  font-size: 1.875rem;
+  margin-bottom: 1.5rem;
+}
+
+.cardTitle {
+  font-family: var(--font-headline);
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.cardDesc {
+  color: var(--color-on-surface-variant);
+  font-size: 0.875rem;
+}
+
+// ─── Position Filter Card ───
+.positionCard {
+  @media (min-width: 768px) {
+    grid-column: span 4;
+  }
+}
+
+.filterTags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.tagActive {
+  background: rgba(104, 219, 174, 0.2);
+  color: var(--color-primary);
+  padding: 0.25rem 0.75rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+}
+
+.tag {
+  background: var(--color-surface-container-highest);
+  color: var(--color-on-surface);
+  padding: 0.25rem 0.75rem;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  opacity: 0.5;
+}
+
+// ─── Data Radar Card ───
+.radarCard {
+  position: relative;
+  overflow: hidden;
+
+  @media (min-width: 768px) {
+    grid-column: span 8;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+  }
+}
+
+.radarContent {
+  flex: 1;
+  z-index: 1;
+}
+
+.radarTitle {
+  font-family: var(--font-headline);
+  font-size: 1.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.radarStats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.statBox {
+  background: var(--color-surface-container-highest);
+  padding: 1rem;
+  border-left: 2px solid var(--color-primary);
+}
+
+.statBoxSecondary {
+  composes: statBox;
+  border-left-color: var(--color-outline-variant);
+}
+
+.statLabel {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  color: var(--color-on-surface-variant);
+}
+
+.statValue {
+  font-size: 1.25rem;
+  font-family: var(--font-headline);
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.statValueDefault {
+  composes: statValue;
+  color: var(--color-on-background);
+}
+
+.radarVisual {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+
+  @media (min-width: 768px) {
+    width: 50%;
+    margin-top: 0;
+  }
+}
+
+.radarSvg {
+  width: 16rem;
+  height: 16rem;
+}
+
+// ─── Role Management Card ───
+.roleCard {
+  @media (min-width: 768px) {
+    grid-column: span 7;
+  }
+}
+
+.roleCardInner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.roleThumb {
+  background: var(--color-surface-container-highest);
+  padding: 1rem;
+  border-radius: 0.75rem;
+}
+
+.roleImage {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 0.5rem;
+  object-fit: cover;
+}
+
+// ─── Quick Sync Card ───
+.syncCard {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+
+  @media (min-width: 768px) {
+    grid-column: span 5;
+  }
+}
+
+.syncIcon {
+  color: var(--color-on-primary);
+  font-size: 1.875rem;
+  margin-bottom: 1.5rem;
+}
+
+.syncTitle {
+  font-family: var(--font-headline);
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.syncDesc {
+  color: rgba(0, 56, 39, 0.7);
+  font-size: 0.875rem;
+}
+
+.syncBtn {
+  background: var(--color-on-primary);
+  color: var(--color-primary);
+  border: none;
+  font-weight: 700;
+  padding: 0.75rem;
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  font-family: var(--font-body);
+}

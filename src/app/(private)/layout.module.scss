@@ -1,0 +1,15 @@
+.wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+.content {
+  margin-left: 16rem;
+  padding-top: 6rem;
+  padding-bottom: 3rem;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  flex: 1;
+  min-height: 100vh;
+  background: var(--color-surface);
+}

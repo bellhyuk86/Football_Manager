@@ -1,0 +1,486 @@
+// ─── Header ───
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 2rem;
+}
+
+.headerTitle {
+  font-family: var(--font-headline), "Space Grotesk", sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.5rem;
+}
+
+.headerDesc {
+  color: var(--color-on-surface-variant);
+  font-size: 0.875rem;
+  font-weight: 300;
+}
+
+.loadingState {
+  text-align: center;
+  padding: 4rem 0;
+  color: var(--color-on-surface-variant);
+  font-size: 0.875rem;
+}
+
+// ─── Content Layout ───
+.content {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 1.5rem;
+  align-items: start;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ─── Calendar ───
+.calendar {
+  background: var(--color-surface-container-low);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+}
+
+.calendarHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.calendarTitle {
+  font-family: var(--font-headline), "Space Grotesk", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-on-surface);
+}
+
+.calendarNav {
+  display: flex;
+  gap: 0.375rem;
+}
+
+.calendarNavBtn {
+  padding: 0.375rem 0.625rem;
+  background: var(--color-surface-container);
+  border: 1px solid rgba(61, 73, 67, 0.2);
+  border-radius: 0.375rem;
+  color: var(--color-on-surface-variant);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+  display: flex;
+  align-items: center;
+
+  & > span {
+    font-size: 1.125rem;
+  }
+
+  &:hover {
+    background: var(--color-surface-container-high);
+  }
+}
+
+.calendarWeekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 0.25rem;
+}
+
+.calendarWeekday {
+  text-align: center;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-on-surface-variant);
+  padding: 0.5rem 0;
+}
+
+.calendarWeekdaySun {
+  color: var(--color-tertiary);
+}
+
+.calendarGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border-top: 1px solid rgba(61, 73, 67, 0.15);
+  border-left: 1px solid rgba(61, 73, 67, 0.15);
+}
+
+.calendarCell {
+  min-height: 5.5rem;
+  padding: 0.375rem;
+  border-right: 1px solid rgba(61, 73, 67, 0.15);
+  border-bottom: 1px solid rgba(61, 73, 67, 0.15);
+  cursor: pointer;
+  transition: background 0.15s;
+
+  &:hover {
+    background: var(--color-surface-container);
+  }
+}
+
+.calendarCellMuted {
+  opacity: 0.3;
+}
+
+.calendarCellSelected {
+  background: rgba(104, 219, 174, 0.08);
+  box-shadow: inset 0 0 0 1px var(--color-primary);
+}
+
+.calendarCellToday {
+  .calendarDay {
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+    border-radius: 50%;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.calendarDay {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-on-surface);
+  margin-bottom: 0.25rem;
+}
+
+.calendarDaySun {
+  color: var(--color-tertiary);
+}
+
+.calendarEvents {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.calendarEvent {
+  font-size: 0.5625rem;
+  font-weight: 600;
+  padding: 0.125rem 0.25rem;
+  background: rgba(104, 219, 174, 0.15);
+  color: var(--color-primary);
+  border-radius: 0.125rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-left: 2px solid var(--color-primary);
+}
+
+.calendarEventMore {
+  font-size: 0.5625rem;
+  color: var(--color-on-surface-variant);
+  padding-left: 0.25rem;
+}
+
+// ─── Detail Panel ───
+.detailPanel {
+  background: var(--color-surface-container-low);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  min-height: 20rem;
+}
+
+.detailEmpty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-height: 16rem;
+  color: var(--color-on-surface-variant);
+  font-size: 0.8125rem;
+}
+
+.detailHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(61, 73, 67, 0.2);
+}
+
+.detailDate {
+  font-family: var(--font-headline), "Space Grotesk", sans-serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-on-surface);
+}
+
+.detailCount {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.detailEmptyText {
+  font-size: 0.8125rem;
+  color: var(--color-on-surface-variant);
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.detailList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.detailCard {
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  background: var(--color-surface-container);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+
+  &:hover {
+    background: var(--color-surface-container-high);
+    border-color: rgba(104, 219, 174, 0.2);
+  }
+}
+
+.detailCardActive {
+  border-color: var(--color-primary);
+  background: rgba(104, 219, 174, 0.08);
+}
+
+.detailCardTitle {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--color-on-surface);
+  margin-bottom: 0.125rem;
+
+  .detailCardActive & {
+    color: var(--color-primary);
+  }
+}
+
+.detailCardMeta {
+  font-size: 0.6875rem;
+  color: var(--color-on-surface-variant);
+}
+
+.detailLoading {
+  text-align: center;
+  padding: 1.5rem 0;
+  color: var(--color-on-surface-variant);
+  font-size: 0.8125rem;
+}
+
+.detailContent {
+  border-top: 1px solid rgba(61, 73, 67, 0.15);
+  padding-top: 1rem;
+}
+
+.detailSection {
+  margin-bottom: 1.25rem;
+}
+
+.detailSectionTitle {
+  font-family: var(--font-headline), "Space Grotesk", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 0.75rem;
+}
+
+.detailSectionLabel {
+  font-size: 0.625rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-on-surface-variant);
+  margin-bottom: 0.5rem;
+}
+
+.detailInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.detailInfoRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  color: var(--color-on-surface);
+
+  & > span:first-child {
+    font-size: 1rem;
+    color: var(--color-on-surface-variant);
+  }
+}
+
+.detailActions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.detailFormations {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.detailFormationCard {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 0.75rem;
+  border-radius: 0.375rem;
+  background: var(--color-surface-container);
+  cursor: pointer;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-on-surface);
+  transition: background 0.15s;
+
+  & > span:first-child {
+    color: var(--color-primary);
+  }
+
+  &:hover {
+    background: var(--color-surface-container-high);
+  }
+}
+
+// ─── Schedule Modal ───
+.scheduleModal {
+  padding: 0.5rem 0;
+}
+
+.scheduleModalTitle {
+  font-family: var(--font-headline), "Space Grotesk", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-on-surface);
+  margin-bottom: 0.25rem;
+}
+
+.scheduleModalDesc {
+  font-size: 0.8125rem;
+  color: var(--color-on-surface-variant);
+  margin-bottom: 1.5rem;
+}
+
+.scheduleForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.scheduleField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+.scheduleFieldRow {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.scheduleLabel {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--color-on-surface-variant);
+}
+
+.scheduleInput {
+  background: var(--color-surface-container);
+  border: 1px solid rgba(61, 73, 67, 0.3);
+  border-radius: 0.375rem;
+  padding: 0.625rem 0.75rem;
+  color: var(--color-on-surface);
+  font-size: 0.8125rem;
+  outline: none;
+  transition: border-color 0.2s;
+
+  &::placeholder {
+    color: var(--color-outline);
+  }
+
+  &:focus {
+    border-color: var(--color-primary);
+  }
+}
+
+.scheduleTextarea {
+  resize: vertical;
+  min-height: 4rem;
+  font-family: inherit;
+}
+
+.scheduleError {
+  font-size: 0.6875rem;
+  color: var(--color-error);
+}
+
+.scheduleModalActions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+// ─── Delete Modal ───
+.deleteModal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.deleteModalIcon {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: rgba(211, 47, 47, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  color: var(--color-error);
+  font-size: 1.75rem;
+}
+
+.deleteModalTitle {
+  font-family: var(--font-headline), "Space Grotesk", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-on-surface);
+  margin-bottom: 0.5rem;
+}
+
+.deleteModalDesc {
+  font-size: 0.875rem;
+  color: var(--color-on-surface-variant);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.deleteModalActions {
+  display: flex;
+  gap: 0.75rem;
+  width: 100%;
+}

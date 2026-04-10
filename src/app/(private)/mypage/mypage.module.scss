@@ -1,0 +1,426 @@
+// ─── Header ───
+.header {
+  margin-bottom: 2.5rem;
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.headerTitle {
+  font-family: var(--font-headline), "Space Grotesk", sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.loadingState {
+  text-align: center;
+  padding: 4rem 0;
+  color: var(--color-on-surface-variant);
+  font-size: 0.875rem;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+// ─── Content ───
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+// ─── Section ───
+.section {
+  background: var(--color-surface-container-low);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+}
+
+.sectionTitle {
+  font-family: var(--font-headline), "Space Grotesk", sans-serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-on-surface);
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(61, 73, 67, 0.2);
+}
+
+// ─── Profile Card ───
+.profileCard {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.profileAvatarWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.profileAvatar {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  background: var(--color-surface-container-highest);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 2px solid rgba(104, 219, 174, 0.3);
+
+  & > span {
+    font-size: 2.5rem;
+    color: var(--color-on-surface-variant);
+  }
+}
+
+.profileAvatarImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profileAvatarActions {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.profileAvatarBtn {
+  padding: 0.25rem;
+  background: var(--color-surface-container);
+  border: 1px solid rgba(61, 73, 67, 0.3);
+  border-radius: 0.25rem;
+  color: var(--color-on-surface-variant);
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+
+  & > span {
+    font-size: 0.875rem;
+  }
+
+  &:hover {
+    color: var(--color-primary);
+    background: var(--color-surface-container-high);
+  }
+}
+
+.profileAvatarBtnDanger:hover {
+  color: var(--color-error);
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.profileName {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-on-surface);
+}
+
+.profileMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  font-size: 0.8125rem;
+  color: var(--color-on-surface-variant);
+}
+
+.profileTags {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0.25rem 0 0.5rem;
+}
+
+.profileRoleBadge {
+  font-size: 0.625rem;
+  font-weight: 900;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  background: rgba(104, 219, 174, 0.15);
+  color: var(--color-primary);
+  border: 1px solid rgba(104, 219, 174, 0.3);
+  letter-spacing: 0.08em;
+}
+
+.profileTeamBadge {
+  font-size: 0.625rem;
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  background: var(--color-surface-container-highest);
+  color: var(--color-on-surface-variant);
+  border: 1px solid rgba(61, 73, 67, 0.2);
+}
+
+// ─── Form Fields ───
+.profileForm,
+.passwordForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.fieldLabel {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--color-on-surface-variant);
+}
+
+.fieldInput {
+  background: var(--color-surface-container);
+  border: 1px solid rgba(61, 73, 67, 0.3);
+  border-radius: 0.375rem;
+  padding: 0.625rem 0.75rem;
+  color: var(--color-on-surface);
+  font-size: 0.8125rem;
+  outline: none;
+  transition: border-color 0.2s;
+
+  &::placeholder {
+    color: var(--color-outline);
+  }
+
+  &:focus {
+    border-color: var(--color-primary);
+  }
+}
+
+.fieldError {
+  font-size: 0.6875rem;
+  color: var(--color-error);
+}
+
+.fieldActions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+// ─── Player Info ───
+.playerCard {
+  background: var(--color-surface-container);
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+}
+
+.playerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.playerName {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-on-surface);
+}
+
+.playerPosition {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  letter-spacing: 0.05em;
+}
+
+.playerOvr {
+  font-family: var(--font-headline), "Space Grotesk", sans-serif;
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--color-primary);
+  line-height: 1;
+}
+
+.playerBody {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+  }
+}
+
+.playerChart {
+  flex-shrink: 0;
+}
+
+.playerStats {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.playerStat {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.playerStatLabel {
+  width: 2.5rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--color-on-surface-variant);
+  flex-shrink: 0;
+}
+
+.playerStatBar {
+  flex: 1;
+  height: 0.375rem;
+  background: var(--color-surface-container-highest);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.playerStatFill {
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: 9999px;
+  transition: width 0.3s;
+}
+
+.playerStatValue {
+  width: 1.75rem;
+  text-align: right;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--color-on-surface);
+  flex-shrink: 0;
+}
+
+// ─── Team Management ───
+.teamRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.teamRowLabel {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--color-on-surface-variant);
+  width: 4rem;
+  flex-shrink: 0;
+}
+
+.teamRowValue {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--color-on-surface);
+}
+
+.teamRowInline {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.teamRowEditBtn {
+  padding: 0.25rem;
+  background: none;
+  border: none;
+  border-radius: 0.25rem;
+  color: var(--color-on-surface-variant);
+  cursor: pointer;
+  transition: color 0.15s;
+
+  &:hover {
+    color: var(--color-primary);
+  }
+}
+
+.teamRowMuted {
+  font-size: 0.8125rem;
+  color: var(--color-outline);
+}
+
+.inviteCode {
+  font-family: "Space Grotesk", monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  letter-spacing: 0.1em;
+  background: rgba(104, 219, 174, 0.08);
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.375rem;
+  border: 1px solid rgba(104, 219, 174, 0.2);
+}
+
+// ─── Account ───
+.accountActions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+// ─── Delete Modal ───
+.deleteModal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.deleteModalIcon {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: rgba(211, 47, 47, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  color: var(--color-error);
+  font-size: 1.75rem;
+}
+
+.deleteModalTitle {
+  font-family: var(--font-headline), "Space Grotesk", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-on-surface);
+  margin-bottom: 0.5rem;
+}
+
+.deleteModalDesc {
+  font-size: 0.875rem;
+  color: var(--color-on-surface-variant);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.deleteModalActions {
+  display: flex;
+  gap: 0.75rem;
+  width: 100%;
+}

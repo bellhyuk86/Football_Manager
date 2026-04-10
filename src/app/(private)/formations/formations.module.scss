@@ -1,0 +1,363 @@
+// ─── Header ───
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 3rem;
+}
+
+.headerTitle {
+  font-family: var(--font-headline), "Space Grotesk", sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.5rem;
+}
+
+.headerDesc {
+  color: var(--color-on-surface-variant);
+  font-size: 0.875rem;
+  font-weight: 300;
+}
+
+// ─── Grid ───
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1.5rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1280px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+// ─── Card ───
+.card {
+  background: var(--color-surface-container-low);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.3s;
+
+  &:hover {
+    background: var(--color-surface-container-high);
+  }
+}
+
+.cardInner {
+  padding: 1.5rem;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.cardTitle {
+  font-family: var(--font-headline), "Space Grotesk", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-on-surface);
+  transition: color 0.3s;
+
+  .card:hover & {
+    color: var(--color-primary);
+  }
+}
+
+.cardDate {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-top: 0.375rem;
+  color: rgba(229, 225, 228, 0.4);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.cardDateIcon {
+  font-size: 0.75rem;
+}
+
+.cardBadge {
+  background: var(--color-surface-container-highest);
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(61, 73, 67, 0.2);
+  font-size: 0.625rem;
+  font-weight: 900;
+  color: var(--color-primary);
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  z-index: 2;
+  transition: opacity 0.2s;
+
+  .card:hover & {
+    opacity: 0;
+  }
+}
+
+// ─── Card Pitch Preview ───
+.cardPitch {
+  aspect-ratio: 4 / 3;
+  background: #1a2e1a;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(104, 219, 174, 0.15);
+  overflow: hidden;
+  position: relative;
+}
+
+.cardPitchCenter {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.cardPitchCircle {
+  width: 4rem;
+  height: 4rem;
+  border: 1px solid rgba(104, 219, 174, 0.5);
+  border-radius: 50%;
+}
+
+.cardPitchLine {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  height: 1px;
+  background: rgba(104, 219, 174, 0.3);
+}
+
+.cardPitchPenaltyTop {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40%;
+  height: 15%;
+  border: 1px solid rgba(104, 219, 174, 0.25);
+  border-top: none;
+  pointer-events: none;
+}
+
+.cardPitchPenaltyBottom {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40%;
+  height: 15%;
+  border: 1px solid rgba(104, 219, 174, 0.25);
+  border-bottom: none;
+  pointer-events: none;
+}
+
+// ─── Player Dots on Mini Pitch ───
+.cardPitchPlayer {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.cardPitchPlayerDot {
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  background: var(--color-primary);
+  box-shadow: 0 0 8px rgba(104, 219, 174, 0.6);
+  border: 2px solid rgba(255, 255, 255, 0.9);
+}
+
+.cardPitchPlayerName {
+  margin-top: 0.25rem;
+  font-size: 0.625rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+// ─── Card Actions ───
+.cardActions {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.2s;
+
+  .card:hover & {
+    opacity: 1;
+  }
+}
+
+.cardActionBtn {
+  padding: 0.375rem;
+  background: var(--color-surface-container-highest);
+  border: none;
+  border-radius: 0.25rem;
+  color: var(--color-on-surface-variant);
+  cursor: pointer;
+  transition: color 0.2s;
+
+  &:hover {
+    color: var(--color-primary);
+  }
+}
+
+.cardActionBtnDanger:hover {
+  color: var(--color-error);
+}
+
+.cardAccent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 0.25rem;
+  background: var(--color-primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s;
+
+  .card:hover & {
+    transform: scaleX(1);
+  }
+}
+
+// ─── Empty Card ───
+.emptyCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed rgba(61, 73, 67, 0.3);
+  border-radius: 0.75rem;
+  min-height: 18rem;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    border-color: rgba(104, 219, 174, 0.5);
+    background: var(--color-surface-container-low);
+  }
+}
+
+.emptyCardIcon {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background: var(--color-surface-container-highest);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  transition: background 0.2s;
+
+  & > span {
+    font-size: 2.5rem;
+    color: rgba(229, 225, 228, 0.2);
+    transition: color 0.2s;
+  }
+
+  .emptyCard:hover & {
+    background: rgba(104, 219, 174, 0.1);
+
+    & > span {
+      color: var(--color-primary);
+    }
+  }
+}
+
+.emptyCardTitle {
+  font-family: var(--font-headline), "Space Grotesk", sans-serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: rgba(229, 225, 228, 0.3);
+  transition: color 0.2s;
+
+  .emptyCard:hover & {
+    color: var(--color-on-surface);
+  }
+}
+
+.emptyCardDesc {
+  font-size: 0.75rem;
+  color: rgba(229, 225, 228, 0.2);
+  margin-top: 0.5rem;
+}
+
+// ─── Loading / Empty ───
+.loadingState {
+  text-align: center;
+  padding: 4rem 0;
+  color: var(--color-on-surface-variant);
+  font-size: 0.875rem;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 4rem 0;
+  color: var(--color-on-surface-variant);
+  font-size: 0.875rem;
+}
+
+// ─── Delete Modal ───
+.deleteModal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.deleteModalIcon {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: rgba(211, 47, 47, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  color: var(--color-error);
+  font-size: 1.75rem;
+}
+
+.deleteModalTitle {
+  font-family: var(--font-headline), "Space Grotesk", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-on-surface);
+  margin-bottom: 0.5rem;
+}
+
+.deleteModalDesc {
+  font-size: 0.875rem;
+  color: var(--color-on-surface-variant);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.deleteModalActions {
+  display: flex;
+  gap: 0.75rem;
+  width: 100%;
+}

@@ -1,0 +1,130 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Team {
+  id          String   @id @default(uuid())
+  name        String   @db.VarChar(100)
+  inviteCode  String   @unique @map("invite_code") @db.VarChar(20)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  users       User[]
+  players     Player[]
+  formations  Formation[]
+  schedules   Schedule[]
+
+  @@map("teams")
+}
+
+model User {
+  id            String    @id @default(uuid())
+  teamId        String?   @map("team_id")
+  username      String    @unique @db.VarChar(50)
+  name          String    @db.VarChar(50)
+  email         String    @unique @db.VarChar(100)
+  password      String    @db.VarChar(255)
+  role          UserRole
+  provider      String    @default("local") @db.VarChar(20)
+  profileImage  String?   @map("profile_image") @db.VarChar(255)
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+
+  team          Team?     @relation(fields: [teamId], references: [id])
+  player        Player?   @relation("UserPlayer")
+  formations    Formation[]
+  schedules     Schedule[]
+
+  @@map("users")
+}
+
+model Player {
+  id         String   @id @default(uuid())
+  teamId     String   @map("team_id")
+  userId     String?  @unique @map("user_id")
+  name       String   @db.VarChar(50)
+  position   Position
+  speed      Int      @default(50) @db.SmallInt
+  shooting   Int      @default(50) @db.SmallInt
+  passing    Int      @default(50) @db.SmallInt
+  dribbling  Int      @default(50) @db.SmallInt
+  defending  Int      @default(50) @db.SmallInt
+  physical   Int      @default(50) @db.SmallInt
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  team       Team     @relation(fields: [teamId], references: [id])
+  user       User?    @relation("UserPlayer", fields: [userId], references: [id])
+  formationPlayers FormationPlayer[]
+
+  @@map("players")
+}
+
+model Formation {
+  id             String   @id @default(uuid())
+  teamId         String   @map("team_id")
+  createdBy      String   @map("created_by")
+  title          String   @db.VarChar(100)
+  matchDate      DateTime @map("match_date") @db.Date
+  placementData  Json     @map("placement_data")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  team           Team     @relation(fields: [teamId], references: [id])
+  creator        User     @relation(fields: [createdBy], references: [id])
+  formationPlayers FormationPlayer[]
+
+  @@map("formations")
+}
+
+model FormationPlayer {
+  id          String            @id @default(uuid())
+  formationId String            @map("formation_id")
+  playerId    String            @map("player_id")
+  type        FormationPlayerType
+
+  formation   Formation         @relation(fields: [formationId], references: [id], onDelete: Cascade)
+  player      Player            @relation(fields: [playerId], references: [id])
+
+  @@map("formation_players")
+}
+
+model Schedule {
+  id         String    @id @default(uuid())
+  teamId     String    @map("team_id")
+  createdBy  String    @map("created_by")
+  title      String    @db.VarChar(100)
+  matchDate  DateTime  @map("match_date") @db.Date
+  matchTime  DateTime? @map("match_time") @db.Time()
+  location   String?   @db.VarChar(200)
+  note       String?   @db.Text
+  createdAt  DateTime  @default(now()) @map("created_at")
+  updatedAt  DateTime  @updatedAt @map("updated_at")
+
+  team       Team      @relation(fields: [teamId], references: [id])
+  creator    User      @relation(fields: [createdBy], references: [id])
+
+  @@map("schedules")
+}
+
+enum UserRole {
+  manager
+  coach
+  player
+}
+
+enum Position {
+  GK
+  DF
+  MF
+  FW
+}
+
+enum FormationPlayerType {
+  starter
+  substitute
+}

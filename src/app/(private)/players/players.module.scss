@@ -1,0 +1,661 @@
+// ─── Header ───
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 3rem;
+}
+
+.headerTitle {
+  font-family: var(--font-headline), "Space Grotesk", sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.5rem;
+}
+
+.headerDesc {
+  color: var(--color-on-surface-variant);
+  font-size: 0.875rem;
+  font-weight: 300;
+}
+
+.headerActions {
+  display: flex;
+  gap: 1rem;
+}
+
+.exportBtn {
+  background: var(--color-surface-container-high);
+  color: var(--color-primary);
+  padding: 0.625rem 1.5rem;
+  border-radius: 0.375rem;
+  border: none;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.2s;
+
+  &:hover {
+    background: var(--color-surface-bright);
+  }
+}
+
+.addPlayerBtn {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  padding: 0.625rem 2rem;
+  border-radius: 0.375rem;
+  border: none;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 8px 16px rgba(104, 219, 174, 0.2);
+  transition: filter 0.2s, transform 0.1s;
+
+  &:hover {
+    filter: brightness(1.1);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.btnIcon {
+  font-size: 0.875rem;
+}
+
+// ─── Tabs & Filters ───
+.tabsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.tabBar {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(61, 73, 67, 0.1);
+}
+
+.tabBtn {
+  padding-bottom: 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--color-on-surface-variant);
+  cursor: pointer;
+  transition: color 0.2s;
+  margin-right: 2.5rem;
+
+  &:hover {
+    color: var(--color-on-surface);
+  }
+}
+
+.tabBtnActive {
+  color: var(--color-primary);
+  font-weight: 700;
+  border-bottom-color: var(--color-primary);
+}
+
+// ─── Filter Row ───
+.filterRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+// ─── Position Filter ───
+.filterBar {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.filterBtn {
+  background: var(--color-surface-container-low);
+  color: var(--color-on-surface-variant);
+  padding: 0.375rem 1.25rem;
+  border-radius: 9999px;
+  border: none;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background: var(--color-surface-container-high);
+  }
+}
+
+.filterBtnActive {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font-weight: 700;
+}
+
+// ─── Player Card Grid ───
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1.5rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1280px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+// ─── Player Card ───
+.playerCard {
+  background: var(--color-surface-container-low);
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.2s;
+
+  &:hover {
+    background: var(--color-surface-container-high);
+  }
+}
+
+.cardActions {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.2s;
+
+  .playerCard:hover & {
+    opacity: 1;
+  }
+}
+
+.cardActionBtn {
+  padding: 0.375rem;
+  background: var(--color-surface-container-highest);
+  border: none;
+  border-radius: 0.25rem;
+  color: var(--color-on-surface-variant);
+  cursor: pointer;
+  transition: color 0.2s;
+
+  &:hover {
+    color: var(--color-primary);
+  }
+}
+
+.cardActionBtnDanger:hover {
+  color: var(--color-error);
+}
+
+.cardTop {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.avatarWrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.avatar {
+  width: 3.5rem;
+  height: 3.5rem;
+  background: var(--color-surface-container-highest);
+  overflow: hidden;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-on-surface-variant);
+  font-size: 1.75rem;
+}
+
+.avatarImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.positionBadge {
+  position: absolute;
+  bottom: -0.5rem;
+  right: -0.5rem;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.625rem;
+  font-weight: 900;
+  border-radius: 0.125rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.positionFW {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.positionMF {
+  background: var(--color-surface-container-highest);
+  color: var(--color-primary);
+}
+
+.positionDF {
+  background: var(--color-secondary-container);
+  color: var(--color-secondary);
+}
+
+.positionGK {
+  background: var(--color-error);
+  color: var(--color-on-error);
+}
+
+.cardInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.playerName {
+  font-family: var(--font-headline), "Space Grotesk", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.125rem;
+  color: var(--color-on-surface);
+}
+
+.playerMeta {
+  font-size: 0.625rem;
+  color: var(--color-on-surface-variant);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
+// ─── OVR Badge ───
+.ovrBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  background: rgba(53, 52, 55, 0.5);
+  padding: 0.25rem 0.625rem;
+  border-radius: 0.25rem;
+}
+
+.ovrLabel {
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: rgba(188, 202, 193, 0.6);
+}
+
+.ovrValue {
+  font-size: 1rem;
+  font-weight: 900;
+  color: var(--color-primary);
+}
+
+// ─── Ability Section ───
+.abilitySection {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(61, 73, 67, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.radarWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.statsBlock {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.abilityGrid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.375rem 1rem;
+}
+
+.abilityItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.abilityLabel {
+  font-size: 0.625rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--color-on-surface-variant);
+}
+
+.abilityValue {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-on-surface);
+}
+
+// ─── Empty Card ───
+.emptyCard {
+  border: 2px dashed rgba(61, 73, 67, 0.2);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-height: 15rem;
+
+  &:hover {
+    border-color: rgba(104, 219, 174, 0.4);
+    background: rgba(104, 219, 174, 0.05);
+  }
+}
+
+.emptyIcon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: var(--color-surface-container-low);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+  transition: transform 0.2s;
+
+  .emptyCard:hover & {
+    transform: scale(1.1);
+  }
+}
+
+.emptyIconInner {
+  color: var(--color-primary);
+  font-size: 1.875rem;
+}
+
+.emptyText {
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-on-surface-variant);
+  transition: color 0.2s;
+
+  .emptyCard:hover & {
+    color: var(--color-primary);
+  }
+}
+
+// ─── Formation Card ───
+.formationCard {
+  background: var(--color-surface-container-low);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  position: relative;
+  transition: background 0.3s;
+
+  &:hover {
+    background: var(--color-surface-container-high);
+  }
+}
+
+.formationCardInner {
+  padding: 1.5rem;
+}
+
+.formationHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.formationTitle {
+  font-family: var(--font-headline), "Space Grotesk", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-on-surface);
+  transition: color 0.3s;
+
+  .formationCard:hover & {
+    color: var(--color-primary);
+  }
+}
+
+.formationDate {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+  color: rgba(229, 225, 228, 0.4);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.formationDateIcon {
+  font-size: 0.75rem;
+}
+
+.formationBadge {
+  background: var(--color-surface-container-highest);
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(61, 73, 67, 0.2);
+  font-size: 0.625rem;
+  font-weight: 900;
+  color: var(--color-primary);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+// ─── Pitch Preview ───
+.pitchPreview {
+  aspect-ratio: 4 / 3;
+  background: var(--color-surface-container-lowest);
+  border-radius: 0.5rem;
+  border: 1px solid rgba(61, 73, 67, 0.1);
+  overflow: hidden;
+  position: relative;
+  background-image:
+    linear-gradient(rgba(135, 148, 140, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(135, 148, 140, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.pitchCenter {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.pitchCircle {
+  width: 6rem;
+  height: 6rem;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: 50%;
+}
+
+.pitchLine {
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background: var(--color-outline-variant);
+}
+
+.formationAccent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 0.25rem;
+  background: var(--color-primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s;
+
+  .formationCard:hover & {
+    transform: scaleX(1);
+  }
+}
+
+// ─── Formation Empty Card ───
+.formationEmptyCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed rgba(61, 73, 67, 0.3);
+  border-radius: 0.75rem;
+  min-height: 22.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    border-color: rgba(104, 219, 174, 0.5);
+    background: var(--color-surface-container-low);
+  }
+}
+
+.formationEmptyIcon {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background: var(--color-surface-container-highest);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  transition: background 0.2s;
+
+  .formationEmptyCard:hover & {
+    background: rgba(104, 219, 174, 0.1);
+  }
+}
+
+.formationEmptyIconInner {
+  font-size: 2.5rem;
+  color: rgba(229, 225, 228, 0.2);
+  transition: color 0.2s;
+
+  .formationEmptyCard:hover & {
+    color: var(--color-primary);
+  }
+}
+
+.formationEmptyTitle {
+  font-family: var(--font-headline), "Space Grotesk", sans-serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: rgba(229, 225, 228, 0.3);
+  transition: color 0.2s;
+
+  .formationEmptyCard:hover & {
+    color: var(--color-on-surface);
+  }
+}
+
+.formationEmptyDesc {
+  font-size: 0.75rem;
+  color: rgba(229, 225, 228, 0.2);
+  margin-top: 0.5rem;
+}
+
+// ─── Pagination ───
+.pagination {
+  margin-top: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.paginationInfo {
+  font-size: 0.625rem;
+  color: var(--color-on-surface-variant);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+}
+
+.paginationBtns {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.pageBtn {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface-container-low);
+  color: var(--color-on-surface-variant);
+  border: none;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover {
+    background: var(--color-surface-container-high);
+  }
+}
+
+.pageBtnActive {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+// ─── Loading / Empty ───
+.loadingState {
+  text-align: center;
+  padding: 4rem 0;
+  color: var(--color-on-surface-variant);
+  font-size: 0.875rem;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 4rem 0;
+  color: var(--color-on-surface-variant);
+  font-size: 0.875rem;
+}

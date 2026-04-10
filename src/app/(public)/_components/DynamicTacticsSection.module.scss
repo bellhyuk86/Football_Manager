@@ -1,0 +1,259 @@
+.section {
+  padding: 6rem 0;
+  background: var(--color-surface-container-lowest);
+  position: relative;
+  overflow: hidden;
+}
+
+.inner {
+  padding: 0 1.5rem;
+  max-width: 1440px;
+  margin: 0 auto;
+
+  @media (min-width: 768px) {
+    padding: 0 3rem;
+  }
+}
+
+.sectionTitle {
+  font-family: var(--font-headline);
+  font-size: clamp(2rem, 5vw, 3.75rem);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  margin-bottom: 5rem;
+  text-align: center;
+}
+
+// ─── Steps Grid ───
+.stepsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.step {
+  background: var(--color-surface-container-low);
+  padding: 2rem;
+  height: 100%;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: translateY(-0.5rem);
+  }
+}
+
+.stepLast {
+  composes: step;
+  border-bottom: 4px solid var(--color-primary);
+}
+
+.stepNumber {
+  color: var(--color-primary);
+  font-family: var(--font-headline);
+  font-size: 3.75rem;
+  font-weight: 900;
+  opacity: 0.1;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.stepTitle {
+  font-family: var(--font-headline);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--color-primary);
+}
+
+.stepDesc {
+  color: var(--color-on-surface-variant);
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+// ─── Tactical Visualization ───
+.visualization {
+  margin-top: 6rem;
+  background: var(--color-surface-container-low);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  padding: 1rem;
+  position: relative;
+
+  // Pitch dot grid
+  background-image: radial-gradient(
+    circle,
+    rgba(61, 73, 67, 0.3) 1px,
+    transparent 1px
+  );
+  background-size: 30px 30px;
+
+  @media (min-width: 768px) {
+    padding: 3rem;
+  }
+}
+
+.vizOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(19, 19, 21, 0.4)
+  );
+}
+
+.vizContent {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: center;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 8fr 4fr;
+  }
+}
+
+// ─── Pitch ───
+.pitch {
+  aspect-ratio: 16 / 9;
+  background: rgba(19, 19, 21, 0.8);
+  border-radius: 0.5rem;
+  border: 1px solid rgba(61, 73, 67, 0.3);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pitchMarkings {
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.4;
+}
+
+.pitchField {
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(229, 225, 228, 0.2);
+  position: relative;
+}
+
+.pitchCenter {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  border-top: 1px solid rgba(229, 225, 228, 0.2);
+}
+
+.pitchCircle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 8rem;
+  height: 8rem;
+  border: 1px solid rgba(229, 225, 228, 0.2);
+  border-radius: 50%;
+}
+
+// ─── Player Markers ───
+.playerMarker {
+  position: absolute;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.75rem;
+}
+
+.markerST {
+  composes: playerMarker;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  box-shadow: 0 4px 20px rgba(104, 219, 174, 0.3);
+}
+
+.markerLM {
+  composes: playerMarker;
+  top: 50%;
+  left: 33%;
+  transform: translateX(-50%);
+  background: rgba(229, 225, 228, 0.1);
+  border: 1px solid rgba(229, 225, 228, 0.3);
+}
+
+.markerRM {
+  composes: playerMarker;
+  top: 50%;
+  right: 33%;
+  transform: translateX(50%);
+  background: rgba(229, 225, 228, 0.1);
+  border: 1px solid rgba(229, 225, 228, 0.3);
+}
+
+// ─── Sidebar Info ───
+.vizSidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.sidebarLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+}
+
+.sidebarTitle {
+  font-family: var(--font-headline);
+  font-size: 1.875rem;
+  font-weight: 700;
+}
+
+.settingsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.settingRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(61, 73, 67, 0.2);
+}
+
+.settingLabel {
+  color: var(--color-on-surface-variant);
+}
+
+.settingValue {
+  color: var(--color-primary);
+  font-weight: 700;
+}

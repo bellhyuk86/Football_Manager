@@ -1,0 +1,33 @@
+.input {
+  background: rgba(53, 52, 55, 0.5);
+  border: none;
+  border-bottom: 2px solid transparent;
+  border-radius: 0.375rem;
+  height: 2.75rem;
+  padding: 0 1rem;
+  color: var(--color-on-surface);
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.2s;
+
+  &::placeholder {
+    color: var(--color-outline);
+  }
+
+  &:focus {
+    border-bottom-color: var(--color-primary);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.error {
+  border-bottom-color: var(--color-error) !important;
+}
+
+.fullWidth {
+  width: 100%;
+}
