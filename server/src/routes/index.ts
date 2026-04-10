@@ -4,6 +4,7 @@ import teamRoutes from "./team.routes";
 import userRoutes from "./user.routes";
 import playerRoutes from "./player.routes";
 import formationRoutes from "./formation.routes";
+import formationTemplateRoutes from "./formationTemplate.routes";
 import scheduleRoutes from "./schedule.routes";
 
 const router = Router();
@@ -17,6 +18,7 @@ router.use("/teams", teamRoutes);
 router.use("/users", userRoutes);
 router.use("/players", playerRoutes);
 router.use("/formations", formationRoutes);
+router.use("/formation-templates", formationTemplateRoutes);
 router.use("/schedules", scheduleRoutes);
 
 export default router;

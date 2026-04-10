@@ -36,24 +36,13 @@ export default function FormationCard({
       {canEdit && (
         <div className={styles.cardActions}>
           <button
-            className={styles.cardActionBtn}
-            onClick={(e) => {
-              e.stopPropagation();
-              onEdit();
-            }}
-          >
-            <span className="material-symbols-outlined" style={{ fontSize: "0.875rem" }}>
-              edit
-            </span>
-          </button>
-          <button
             className={`${styles.cardActionBtn} ${styles.cardActionBtnDanger}`}
             onClick={(e) => {
               e.stopPropagation();
               onDelete();
             }}
           >
-            <span className="material-symbols-outlined" style={{ fontSize: "0.875rem" }}>
+            <span className="material-symbols-outlined">
               delete
             </span>
           </button>

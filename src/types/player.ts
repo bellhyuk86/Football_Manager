@@ -13,6 +13,7 @@ export interface Player {
   ovr: number;
   userId?: string | null;
   profileImage?: string | null;
+  createdAt: string;
 }
 
 export interface PlayerPayload {

@@ -17,6 +17,7 @@ model Team {
   players     Player[]
   formations  Formation[]
   schedules   Schedule[]
+  formationTemplates FormationTemplate[]
 
   @@map("teams")
 }
@@ -38,6 +39,7 @@ model User {
   player        Player?   @relation("UserPlayer")
   formations    Formation[]
   schedules     Schedule[]
+  formationTemplates FormationTemplate[]
 
   @@map("users")
 }
@@ -91,6 +93,21 @@ model FormationPlayer {
   player      Player            @relation(fields: [playerId], references: [id])
 
   @@map("formation_players")
+}
+
+model FormationTemplate {
+  id         String   @id @default(uuid())
+  teamId     String   @map("team_id")
+  createdBy  String   @map("created_by")
+  name       String   @db.VarChar(50)
+  positions  Json
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  team       Team     @relation(fields: [teamId], references: [id])
+  creator    User     @relation(fields: [createdBy], references: [id])
+
+  @@map("formation_templates")
 }
 
 model Schedule {

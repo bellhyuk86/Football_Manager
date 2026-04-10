@@ -8,9 +8,10 @@ interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
+  panelClassName?: string;
 }
 
-export default function Modal({ isOpen, onClose, children }: ModalProps) {
+export default function Modal({ isOpen, onClose, children, panelClassName }: ModalProps) {
   const overlayRef = useRef<HTMLDivElement>(null);
 
   const handleKeyDown = useCallback(
@@ -42,7 +43,7 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
       ref={overlayRef}
       onClick={handleOverlayClick}
     >
-      <div className={styles.panel}>
+      <div className={`${styles.panel} ${panelClassName ?? ""}`}>
         <button className={styles.closeBtn} onClick={onClose} type="button">
           <span className="material-symbols-outlined">close</span>
         </button>

@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useState, useEffect, useCallback, useRef } from "react";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
+import api from "@/lib/api";
 import useAuthStore from "@/stores/useAuthStore";
 import { useFormationEditor } from "./_hooks/useFormationEditor";
 import { useFormationAPI } from "./_hooks/useFormationAPI";
@@ -12,11 +13,13 @@ import EditorBottomBar from "./_components/EditorBottomBar";
 import AddPlayerModal from "./_components/AddPlayerModal";
 import DiscardModal from "./_components/DiscardModal";
 import type { Player, DrawingStroke } from "@/types";
+import type { FormationTemplate } from "../_types";
 import styles from "./editor.module.scss";
 
 export default function FormationEditorPage() {
   const params = useParams();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const id = params.id as string;
   const isNew = id === "new";
 
@@ -26,6 +29,7 @@ export default function FormationEditorPage() {
   const { state, dispatch, buildPayload } = useFormationEditor();
   const { loading: apiLoading, loadFormation, saveFormation } = useFormationAPI();
   const [discardModalOpen, setDiscardModalOpen] = useState(false);
+  const templateAppliedRef = useRef(false);
 
   // Load existing formation
   useEffect(() => {
@@ -36,6 +40,36 @@ export default function FormationEditorPage() {
       }
     });
   }, [id, isNew]);
+
+  // Apply template from URL query (new formation only)
+  useEffect(() => {
+    if (!isNew) return;
+    if (templateAppliedRef.current) return;
+    const templateId = searchParams.get("templateId");
+    if (!templateId) return;
+    templateAppliedRef.current = true;
+
+    (async () => {
+      try {
+        const [templateRes, playersRes] = await Promise.all([
+          api.get<FormationTemplate>(`/formation-templates/${templateId}`),
+          api.get<Player[]>("/players"),
+        ]);
+
+        dispatch({
+          type: "APPLY_TEMPLATE_WITH_PLAYERS",
+          payload: {
+            templateName: templateRes.data.name,
+            positions: templateRes.data.positions,
+            players: playersRes.data,
+          },
+        });
+        toast.success(`${templateRes.data.name} 템플릿이 적용되었습니다.`);
+      } catch {
+        toast.error("템플릿 적용에 실패했습니다.");
+      }
+    })();
+  }, [isNew, searchParams]);
 
   const handleSave = useCallback(async () => {
     const payload = buildPayload();

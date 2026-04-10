@@ -7,6 +7,8 @@ import type {
   PlacementData,
   FormationPayload,
 } from "@/types";
+import type { TemplatePosition } from "../../_types";
+import { matchPlayersToTemplate } from "../../_utils/templateMatcher";
 
 // ─── State ───
 export interface FormationEditorState {
@@ -46,6 +48,10 @@ type Action =
   | { type: "MOVE_TO_STARTERS"; payload: string }
   | { type: "MOVE_TO_SUBSTITUTES"; payload: string }
   | { type: "UPDATE_PLACEMENT"; payload: { playerId: string; x: number; y: number } }
+  | {
+      type: "APPLY_TEMPLATE_WITH_PLAYERS";
+      payload: { templateName: string; positions: TemplatePosition[]; players: Player[] };
+    }
   | { type: "TOGGLE_ADD_MODAL" }
   | { type: "TOGGLE_DRAWING_MODE" }
   | { type: "SET_DRAWING"; payload: PlacementData["drawing"] }
@@ -130,6 +136,42 @@ function reducer(state: FormationEditorState, action: Action): FormationEditorSt
         ...state,
         starters: asType === "starter" ? [...state.starters, ...newEntries] : state.starters,
         substitutes: asType === "substitute" ? [...state.substitutes, ...newEntries] : state.substitutes,
+        placements: newPlacements,
+        isDirty: true,
+      };
+    }
+
+    case "APPLY_TEMPLATE_WITH_PLAYERS": {
+      const { templateName, positions, players } = action.payload;
+      const { assignments, remaining } = matchPlayersToTemplate(positions, players);
+
+      const starters: FormationPlayerEntry[] = [];
+      const newPlacements: Record<string, { x: number; y: number }> = {};
+
+      assignments.forEach((a) => {
+        if (!a.player) return;
+        const entry: FormationPlayerEntry = {
+          id: crypto.randomUUID(),
+          playerId: a.player.id,
+          type: "starter",
+          player: { id: a.player.id, name: a.player.name, position: a.player.position },
+        };
+        starters.push(entry);
+        newPlacements[a.player.id] = { x: a.slot.x, y: a.slot.y };
+      });
+
+      const substitutes: FormationPlayerEntry[] = remaining.map((p) => ({
+        id: crypto.randomUUID(),
+        playerId: p.id,
+        type: "substitute",
+        player: { id: p.id, name: p.name, position: p.position },
+      }));
+
+      return {
+        ...state,
+        title: state.title || templateName,
+        starters,
+        substitutes,
         placements: newPlacements,
         isDirty: true,
       };
