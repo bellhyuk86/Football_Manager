@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import api from "@/lib/api";
+import { hashPassword } from "@/lib/crypto";
 import type { AuthState } from "@/types";
 
 const useAuthStore = create<AuthState>((set) => ({
@@ -11,7 +12,8 @@ const useAuthStore = create<AuthState>((set) => ({
   login: async (username, password) => {
     set({ loading: true, error: null });
     try {
-      const { data } = await api.post("/auth/login", { username, password });
+      const hashedPassword = await hashPassword(password);
+      const { data } = await api.post("/auth/login", { username, password: hashedPassword });
       localStorage.setItem("token", data.token);
       set({ token: data.token, user: data.user, loading: false });
       return true;

@@ -5,6 +5,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 import api from "@/lib/api";
+import { hashPassword } from "@/lib/crypto";
 import TextInput from "@/app/_components/TextInput/TextInput";
 import Button from "@/app/_components/Button/Button";
 import styles from "./resetPassword.module.scss";
@@ -80,9 +81,10 @@ function ResetPasswordForm() {
     setError("");
 
     try {
+      const hashedPassword = await hashPassword(data.newPassword);
       await api.patch("/auth/reset-password", {
         token,
-        newPassword: data.newPassword,
+        newPassword: hashedPassword,
       });
       setSuccess(true);
     } catch (err: any) {

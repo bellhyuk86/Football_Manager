@@ -1,5 +1,6 @@
 import { useState } from "react";
 import api from "@/lib/api";
+import { hashPassword } from "@/lib/crypto";
 import useAuthStore from "@/stores/useAuthStore";
 import type { Role, RegisterPayload, RegisterResult } from "@/types";
 
@@ -15,7 +16,8 @@ export function useRegister() {
     setLoading(true);
 
     try {
-      const { data } = await api.post("/auth/register", payload);
+      const hashedPayload = { ...payload, password: await hashPassword(payload.password) };
+      const { data } = await api.post("/auth/register", hashedPayload);
 
       localStorage.setItem("token", data.token);
       useAuthStore.getState().hydrate();

@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import toast from "react-hot-toast";
 import api from "@/lib/api";
+import { hashPassword } from "@/lib/crypto";
 import useAuthStore from "@/stores/useAuthStore";
 import type { Player } from "@/types";
 
@@ -83,7 +84,11 @@ export function useMyPage() {
   const changePassword = useCallback(
     async (currentPassword: string, newPassword: string) => {
       try {
-        await api.patch("/users/me/password", { currentPassword, newPassword });
+        const [hashedCurrent, hashedNew] = await Promise.all([
+          hashPassword(currentPassword),
+          hashPassword(newPassword),
+        ]);
+        await api.patch("/users/me/password", { currentPassword: hashedCurrent, newPassword: hashedNew });
         toast.success("비밀번호가 변경되었습니다.");
         return true;
       } catch (err: any) {
