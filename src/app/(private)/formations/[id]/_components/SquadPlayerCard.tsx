@@ -3,9 +3,6 @@
 import type { FormationPlayerEntry } from "@/types";
 import styles from "../editor.module.scss";
 
-const API_BASE =
-  process.env.NEXT_PUBLIC_API_URL?.replace("/api", "") || "http://localhost:4000";
-
 interface SquadPlayerCardProps {
   entry: FormationPlayerEntry;
   onRemove: (playerId: string) => void;
@@ -26,7 +23,7 @@ export default function SquadPlayerCard({
       <div className={styles.squadCardAvatar}>
         {entry.player.user?.profileImage ? (
           <img
-            src={`${API_BASE}${entry.player.user.profileImage}`}
+            src={entry.player.user.profileImage}
             alt={entry.player.name}
             className={styles.squadCardAvatarImg}
           />

@@ -12,8 +12,6 @@ const ROLE_LABEL: Record<string, string> = {
   player: "선수",
 };
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL?.replace("/api", "") || "http://localhost:4000";
-
 interface ProfileSectionProps {
   profile: {
     username: string;
@@ -80,9 +78,7 @@ export default function ProfileSection({
     e.target.value = "";
   };
 
-  const imageUrl = profile.profileImage
-    ? `${API_BASE}${profile.profileImage}`
-    : null;
+  const imageUrl = profile.profileImage || null;
 
   return (
     <section className={styles.section}>

@@ -1,8 +1,7 @@
-import fs from "fs";
-import path from "path";
 import { Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import prisma from "../lib/prisma";
+import { cloudinary } from "../lib/upload";
 
 // GET /api/users/me
 export async function getMe(req: Request, res: Response): Promise<void> {
@@ -217,23 +216,26 @@ export async function uploadProfileImage(req: Request, res: Response): Promise<v
       return;
     }
 
-    const filePath = `/uploads/profiles/${req.file.filename}`;
+    const imageUrl = (req.file as any).path;
 
-    // Delete old profile image file if exists
+    // Delete old profile image from Cloudinary if exists
     const currentUser = await prisma.user.findUnique({
       where: { id: req.user!.userId },
       select: { profileImage: true },
     });
     if (currentUser?.profileImage) {
-      const oldPath = path.join(__dirname, "..", "..", currentUser.profileImage);
-      if (fs.existsSync(oldPath)) {
-        fs.unlinkSync(oldPath);
+      const publicId = currentUser.profileImage
+        .split("/upload/")[1]
+        ?.replace(/^v\d+\//, "")
+        ?.replace(/\.[^.]+$/, "");
+      if (publicId) {
+        await cloudinary.uploader.destroy(publicId).catch(() => {});
       }
     }
 
     const user = await prisma.user.update({
       where: { id: req.user!.userId },
-      data: { profileImage: filePath },
+      data: { profileImage: imageUrl },
       select: {
         id: true,
         username: true,
@@ -260,9 +262,12 @@ export async function deleteProfileImage(req: Request, res: Response): Promise<v
     });
 
     if (currentUser?.profileImage) {
-      const oldPath = path.join(__dirname, "..", "..", currentUser.profileImage);
-      if (fs.existsSync(oldPath)) {
-        fs.unlinkSync(oldPath);
+      const publicId = currentUser.profileImage
+        .split("/upload/")[1]
+        ?.replace(/^v\d+\//, "")
+        ?.replace(/\.[^.]+$/, "");
+      if (publicId) {
+        await cloudinary.uploader.destroy(publicId).catch(() => {});
       }
     }
 

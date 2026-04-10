@@ -5,14 +5,11 @@ import { useRouter } from "next/navigation";
 import useAuthStore from "@/stores/useAuthStore";
 import styles from "./NavBar.module.scss";
 
-const API_BASE =
-  process.env.NEXT_PUBLIC_API_URL?.replace("/api", "") || "http://localhost:4000";
-
 export default function NavBar() {
   const router = useRouter();
   const { token, user, logout } = useAuthStore();
   const isLoggedIn = !!token;
-  const avatarUrl = user?.profileImage ? `${API_BASE}${user.profileImage}` : null;
+  const avatarUrl = user?.profileImage || null;
 
   const handleLogout = () => {
     logout();

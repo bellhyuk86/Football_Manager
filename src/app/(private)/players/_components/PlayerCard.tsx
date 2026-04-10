@@ -5,9 +5,6 @@ import useAuthStore from "@/stores/useAuthStore";
 import RadarChart from "./RadarChart";
 import styles from "../players.module.scss";
 
-const API_BASE =
-  process.env.NEXT_PUBLIC_API_URL?.replace("/api", "") || "http://localhost:4000";
-
 interface PlayerCardProps {
   player: Player;
   onEdit: (player: Player) => void;
@@ -68,7 +65,7 @@ console.log(player.profileImage)
           <div className={styles.avatar}>
             {player.profileImage ? (
               <img
-                src={`${API_BASE}${player.profileImage}`}
+                src={player.profileImage}
                 alt={player.name}
                 className={styles.avatarImg}
               />

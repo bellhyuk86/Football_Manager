@@ -3,9 +3,6 @@
 import type { TeamMember } from "../_hooks/useTeamMembers";
 import styles from "../users.module.scss";
 
-const API_BASE =
-  process.env.NEXT_PUBLIC_API_URL?.replace("/api", "") || "http://localhost:4000";
-
 const ROLE_LABEL: Record<string, string> = {
   manager: "감독",
   coach: "코치",
@@ -24,7 +21,7 @@ export default function UserCard({ member, isCurrentUser, onChangeRole }: UserCa
       {/* Profile image */}
       <div className={styles.cardAvatar}>
         {member.profileImage ? (
-          <img src={`${API_BASE}${member.profileImage}`} alt={member.name} className={styles.cardAvatarImg} />
+          <img src={member.profileImage} alt={member.name} className={styles.cardAvatarImg} />
         ) : (
           <span className="material-symbols-outlined">person</span>
         )}
