@@ -134,10 +134,7 @@
 
 // ─── Role ───
 .cardRole {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.5rem;
+  position: relative;
   flex-shrink: 0;
 }
 
@@ -147,6 +144,23 @@
   padding: 0.25rem 0.75rem;
   border-radius: 9999px;
   letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  cursor: default;
+}
+
+.cardRoleBadgeClickable {
+  cursor: pointer;
+  transition: filter 0.2s;
+
+  &:hover {
+    filter: brightness(1.2);
+  }
+}
+
+.cardRoleBadgeArrow {
+  font-size: 1rem !important;
 }
 
 .cardRoleBadge_manager {
@@ -167,20 +181,47 @@
   border: 1px solid rgba(61, 73, 67, 0.2);
 }
 
-.cardRoleSelect {
-  background: var(--color-surface-container);
+// ─── Role Dropdown ───
+.roleDropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  min-width: 8rem;
+  background: var(--color-surface-container-high);
   border: 1px solid rgba(61, 73, 67, 0.3);
-  border-radius: 0.25rem;
-  padding: 0.25rem 0.5rem;
-  font-size: 0.6875rem;
-  font-weight: 600;
-  color: var(--color-on-surface);
-  cursor: pointer;
-  outline: none;
-  transition: border-color 0.15s;
+  border-radius: 0.5rem;
+  padding: 0.25rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  z-index: 10;
+}
 
-  &:focus {
-    border-color: var(--color-primary);
+.roleDropdownItem {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.625rem 0.75rem;
+  background: none;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-on-surface-variant);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+
+  &:hover {
+    background: var(--color-surface-container-highest);
+    color: var(--color-on-surface);
+  }
+}
+
+.roleDropdownItemActive {
+  color: var(--color-primary);
+
+  &:hover {
+    color: var(--color-primary);
   }
 }
 

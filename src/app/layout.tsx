@@ -17,7 +17,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Tactify FC | The Analytical Engine",
+  title: "Football_Manager",
   description:
     "엘리트 전술 시각화, 정밀한 선수 데이터, 그리고 완벽한 팀 동기화를 통해 코칭 스태프의 역량을 강화하세요.",
 };

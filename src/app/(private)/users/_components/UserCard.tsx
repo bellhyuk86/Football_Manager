@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useRef, useEffect } from "react";
 import type { TeamMember } from "../_hooks/useTeamMembers";
 import styles from "../users.module.scss";
 
@@ -9,6 +10,12 @@ const ROLE_LABEL: Record<string, string> = {
   player: "선수",
 };
 
+const ROLES: Array<{ value: "manager" | "coach" | "player"; label: string }> = [
+  { value: "manager", label: "감독" },
+  { value: "coach", label: "코치" },
+  { value: "player", label: "선수" },
+];
+
 interface UserCardProps {
   member: TeamMember;
   isCurrentUser: boolean;
@@ -16,6 +23,27 @@ interface UserCardProps {
 }
 
 export default function UserCard({ member, isCurrentUser, onChangeRole }: UserCardProps) {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!dropdownOpen) return;
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [dropdownOpen]);
+
+  const handleRoleSelect = (role: "manager" | "coach" | "player") => {
+    if (role !== member.role) {
+      onChangeRole(member.id, role);
+    }
+    setDropdownOpen(false);
+  };
+
   return (
     <div className={`${styles.card} ${isCurrentUser ? styles.cardCurrent : ""}`}>
       {/* Profile image */}
@@ -38,23 +66,37 @@ export default function UserCard({ member, isCurrentUser, onChangeRole }: UserCa
       </div>
 
       {/* Role */}
-      <div className={styles.cardRole}>
-        <span className={`${styles.cardRoleBadge} ${styles[`cardRoleBadge_${member.role}`]}`}>
+      <div className={styles.cardRole} ref={dropdownRef}>
+        <button
+          className={`${styles.cardRoleBadge} ${styles[`cardRoleBadge_${member.role}`]} ${!isCurrentUser ? styles.cardRoleBadgeClickable : ""}`}
+          onClick={() => !isCurrentUser && setDropdownOpen(!dropdownOpen)}
+          disabled={isCurrentUser}
+        >
           {ROLE_LABEL[member.role]}
-        </span>
+          {!isCurrentUser && (
+            <span className={`material-symbols-outlined ${styles.cardRoleBadgeArrow}`}>
+              {dropdownOpen ? "expand_less" : "expand_more"}
+            </span>
+          )}
+        </button>
 
-        {!isCurrentUser && (
-          <select
-            className={styles.cardRoleSelect}
-            value={member.role}
-            onChange={(e) =>
-              onChangeRole(member.id, e.target.value as "manager" | "coach" | "player")
-            }
-          >
-            <option value="manager">감독</option>
-            <option value="coach">코치</option>
-            <option value="player">선수</option>
-          </select>
+        {dropdownOpen && (
+          <div className={styles.roleDropdown}>
+            {ROLES.map((role) => (
+              <button
+                key={role.value}
+                className={`${styles.roleDropdownItem} ${member.role === role.value ? styles.roleDropdownItemActive : ""}`}
+                onClick={() => handleRoleSelect(role.value)}
+              >
+                {role.label}
+                {member.role === role.value && (
+                  <span className="material-symbols-outlined" style={{ fontSize: "1rem" }}>
+                    check
+                  </span>
+                )}
+              </button>
+            ))}
+          </div>
         )}
       </div>
     </div>
